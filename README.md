@@ -22,9 +22,11 @@ builder trust or availability authorities.
 
 ## Bootstrap status
 
-This root commit establishes the repository boundary and directory layout.
-GBA-1 will add the source-quality, workflow, evidence, and builder-production
-contracts through governed ticket work.
+The root commit establishes the repository boundary and directory layout.
+GBA-1 adds source-quality, workflow, Ruleset, evidence, and builder-production
+contracts through governed ticket work. It does not claim a released builder
+artifact until the separately required infrastructure and evidence authorities
+exist.
 
 ## Repository layout
 

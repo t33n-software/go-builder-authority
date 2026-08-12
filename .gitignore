@@ -1,0 +1,7 @@
+.build/
+.cache/
+coverage/
+dist/
+*.out
+*.test
+*.exe
