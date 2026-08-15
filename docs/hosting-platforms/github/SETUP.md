@@ -8,7 +8,7 @@ interface.
 Open:
 
 ```text
-CyberT33N/go-builder-authority
+t33n-software/go-builder-authority
 -> Settings
 -> General
 ```
@@ -38,7 +38,7 @@ Repository access:
 Only select repositories
 
 Repository:
-CyberT33N/go-builder-authority
+t33n-software/go-builder-authority
 
 Webhook:
 disabled
