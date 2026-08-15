@@ -1,4 +1,4 @@
-module github.com/CyberT33N/go-builder-authority
+module github.com/t33n-software/go-builder-authority
 
 go 1.26
 

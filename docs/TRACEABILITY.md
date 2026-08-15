@@ -30,3 +30,25 @@ tenant configuration, credentials, or deployment infrastructure
 These omissions are deliberate fail-closed boundaries. A builder artifact
 cannot become approved or be consumed until each missing authority and evidence
 contract is explicitly implemented and verified.
+
+## GBA-3: Migrate to the t33n-software organization namespace
+
+Status: in implementation.
+
+GBA-3 establishes:
+
+```text
+module path and GitHub setup references on the t33n-software organization
+  namespace
+push-protections Ruleset source 00-push-protections.json in the verified
+  GitHub export format
+```
+
+GBA-3 does not establish:
+
+```text
+an approved Go builder image
+builder artifact or evidence registries
+any change to the builder authority, evidence, policy, or consumer contracts
+any change to the GBA-2 builder artifact delivery branch
+```
