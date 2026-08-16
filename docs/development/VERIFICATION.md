@@ -11,19 +11,34 @@ go test -count=1 ./...
 go run -mod=readonly ./cmd/check-coverage
 ```
 
+The Go toolchain is pinned exactly (`toolchain go1.26.6`,
+`GOTOOLCHAIN=local`); no lane downloads a toolchain at build time.
+
 The source gate checks:
 
 ```text
 Go formatting
 go mod verify
 go mod tidy -diff
+tools module download, verify, and tidy -diff
+staticcheck lint
 unit tests
 100% statement coverage
 race detection
 go vet
+govulncheck fail-closed vulnerability analysis
+Lefthook configuration validation
 Linux/AMD64 source-gate build
 embedded module provenance
 ```
+
+Build tools (`govulncheck`, `staticcheck`, `lefthook`) live in the separate
+pinned `tools/` module with its own verified `go.mod` and committed `go.sum`;
+they never join the source module graph. CI re-runs the full gate on a daily
+schedule so newly disclosed vulnerabilities in the pinned toolchain or
+dependency graph fail closed even without source changes. Lefthook provides
+the local `commit-msg` hook (governed commit-message validation) and the
+pre-push source-quality gate.
 
 ## Deliberate delivery boundary
 

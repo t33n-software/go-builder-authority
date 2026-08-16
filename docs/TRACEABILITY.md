@@ -52,3 +52,26 @@ builder artifact or evidence registries
 any change to the builder authority, evidence, policy, or consumer contracts
 any change to the GBA-2 builder artifact delivery branch
 ```
+
+## GBA-4: Align the Go 1.26.6 toolchain and source gates
+
+Status: in implementation.
+
+GBA-4 establishes:
+
+```text
+Go toolchain pin go1.26.6 with GOTOOLCHAIN=local
+pinned tools module with govulncheck, staticcheck, and Lefthook
+fail-closed vulnerability analysis in the source gate
+Lefthook configuration validation and commit-msg hook
+daily CI re-scan of the full source gate
+```
+
+GBA-4 does not establish:
+
+```text
+an approved Go builder image
+builder artifact or evidence registries
+any change to the builder authority, evidence, policy, or consumer contracts
+any change to the GBA-2 builder artifact delivery branch
+```
