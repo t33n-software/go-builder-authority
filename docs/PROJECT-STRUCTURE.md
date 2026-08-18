@@ -12,11 +12,9 @@ builder/
 cmd/                        repository-local verification tools
 docs/
   architecture/             authority and lifecycle decisions
-  conventions/              Go builder source conventions
+  conventions/              Go builder source and hosting-platform rule-set
+                            conventions
   development/              local and CI verification instructions
-  hosting-platforms/
-    github/
-      rulesets/             importable repository-specific Rulesets
   operations/               evidence audit and revocation operations
   specification/            builder artifact and consumer contracts
 internal/
