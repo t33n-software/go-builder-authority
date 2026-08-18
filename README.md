@@ -37,8 +37,8 @@ exist.
 - `cmd/` contains repository-local verification tooling.
 - `internal/authority/` contains authority-owned Go logic when materialized.
 - `internal/packaging/` contains whitebox workflow and packaging contracts.
-- `docs/` contains architecture, operations, specification, development, and
-  GitHub Ruleset documentation.
+- `docs/` contains architecture, conventions, operations, specification, and
+  development documentation.
 
 ## Non-goals
 
