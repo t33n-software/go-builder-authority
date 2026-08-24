@@ -28,15 +28,28 @@ contracts through governed ticket work. It does not claim a released builder
 artifact until the separately required infrastructure and evidence authorities
 exist.
 
+In CI the repository is a tenant of the canonical repo surface: the three
+shared-line workflows (`ci.yml`, `codeql.yml`, `dependency-review.yml`) are
+byte-identical callers of the repository-governance home, and the canonical
+quality gate of the go-quality-authority territory home runs through the
+tooling module. The `repo-bindings.json` manifest binds the adoption (home
+pin, fleet classes, caller and file hashes, config-seam and tool-catalog
+versions), and the `Canonical conformance` check re-proves it fail-closed on
+every shared-line change.
+
 ## Repository layout
 
 - `builder/go/` contains the Go builder definition and controlled input
   manifests.
 - `policy/` contains versioned builder policy references without credentials.
-- `.github/` contains future CI, delivery, and reusable action contracts.
+- `.github/` contains the canonical shared-line workflow callers, the
+  canonical conformance workflow, and the ownership contract.
 - `cmd/` contains repository-local verification tooling.
 - `internal/authority/` contains authority-owned Go logic when materialized.
 - `internal/packaging/` contains whitebox workflow and packaging contracts.
+- `repo-bindings.json` binds the canonical repo-surface adoption (home pin,
+  fleet classes, caller and file hashes, config-seam and tool-catalog
+  versions).
 - `docs/` contains architecture, conventions, operations, specification, and
   development documentation.
 
