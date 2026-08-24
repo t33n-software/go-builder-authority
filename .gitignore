@@ -1,7 +1,12 @@
-.build/
-.cache/
-coverage/
-dist/
-*.out
+# Local build and test outputs.
+/.build/
+/dist/
+/coverage/
+/.cache/
+*.coverprofile
 *.test
+*.out
+*.cov
+
+# -- project additions below this line --
 *.exe

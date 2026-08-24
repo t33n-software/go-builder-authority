@@ -75,3 +75,28 @@ builder artifact or evidence registries
 any change to the builder authority, evidence, policy, or consumer contracts
 any change to the GBA-2 builder artifact delivery branch
 ```
+
+## GBA-6: Adopt the canonical repo surface
+
+Status: in implementation.
+
+GBA-6 establishes:
+
+```text
+schema-v3 quality configuration with the controlled toolchain identity
+version surfaces on the development tools
+canonical tool pins (go-quality-authority v1.0.1, repository-governance
+  verifier)
+canonical file family and the materialized CODEOWNERS contract
+byte-identical canonical workflow callers and the tenant binding manifest
+canonical conformance check
+```
+
+GBA-6 does not establish:
+
+```text
+an approved Go builder image
+builder artifact or evidence registries
+any change to the builder authority, evidence, policy, or consumer contracts
+any change to the GBA-2 builder artifact delivery branch
+```

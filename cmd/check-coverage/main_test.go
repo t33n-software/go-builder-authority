@@ -68,6 +68,20 @@ func TestRun(t *testing.T) {
 	}
 }
 
+func TestRunPrintsVersion(t *testing.T) {
+	var stdout, stderr bytes.Buffer
+	runner := func(context.Context, string, ...string) ([]byte, error) {
+		return nil, nil
+	}
+	code := run(context.Background(), []string{"--version"}, &stdout, &stderr, runner)
+	if code != 0 {
+		t.Fatalf("run() = %d, want 0", code)
+	}
+	if stdout.String() != "check-coverage devel\n" {
+		t.Fatalf("stdout = %q, want version output", stdout.String())
+	}
+}
+
 func TestRunUsesBackgroundContextForNil(t *testing.T) {
 	var received context.Context
 	code := run(testNilContext(), nil, &bytes.Buffer{}, &bytes.Buffer{}, func(ctx context.Context, executable string, arguments ...string) ([]byte, error) {
