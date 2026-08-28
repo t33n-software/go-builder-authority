@@ -167,9 +167,12 @@ func TestModuleIdentityAndQualityContract(t *testing.T) {
 
 	quality := readRepositoryFile(t, "git-governance.quality.json")
 	for _, required := range []string{
+		`"schemaVersion": 4`,
+		`"language": "go"`,
+		`"version": "1.26.6"`,
+		`"extends": []`,
 		"go-builder-authority-source-quality",
 		"./cmd/build",
-		`"schemaVersion": 3`,
 	} {
 		if !strings.Contains(quality, required) {
 			t.Fatalf("git-governance.quality.json does not contain %q", required)
