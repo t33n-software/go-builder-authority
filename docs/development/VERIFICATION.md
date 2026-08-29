@@ -6,9 +6,9 @@ The GBA-1 source foundation is verified without tenant credentials or builder
 registry access:
 
 ```text
-go run -mod=readonly ./cmd/build
 go test -count=1 ./...
-go run -mod=readonly ./cmd/check-coverage
+go tool -modfile tools/go.mod check-coverage
+go tool -modfile tools/go.mod quality-gate
 ```
 
 The Go toolchain is pinned exactly (`toolchain go1.26.6`,

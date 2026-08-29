@@ -32,7 +32,8 @@ For every Go change:
 ```text
 gofmt
 go test ./...
-go run -mod=readonly ./cmd/check-coverage
+go tool -modfile tools/go.mod check-coverage
+go tool -modfile tools/go.mod quality-gate
 git diff --check
 ```
 

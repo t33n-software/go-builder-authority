@@ -2,40 +2,17 @@
   "schemaVersion": 4,
   "toolchain": { "language": "go", "version": "1.26.6" },
   "extends": [],
-  "defaults": {
-    "includeFamilies": [
-      "feature",
-      "fix",
-      "docs",
-      "refactor",
-      "chore",
-      "test",
-      "perf",
-      "hotfix"
-    ]
-  },
   "gates": [
     {
       "name": "go-builder-authority-source-quality",
       "command": "go",
       "args": [
-        "run",
-        "-mod=readonly",
-        "./cmd/build"
+        "tool",
+        "-modfile",
+        "tools/go.mod",
+        "quality-gate"
       ],
       "timeout": "15m"
     }
-  ],
-  "project": {
-    "binaries": [
-      {
-        "package": "./cmd/build",
-        "smoke": ["--version"]
-      },
-      {
-        "package": "./cmd/check-coverage",
-        "smoke": ["--version"]
-      }
-    ]
-  }
+  ]
 }

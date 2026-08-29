@@ -44,7 +44,8 @@ every shared-line change.
 - `policy/` contains versioned builder policy references without credentials.
 - `.github/` contains the canonical shared-line workflow callers, the
   canonical conformance workflow, and the ownership contract.
-- `cmd/` contains repository-local verification tooling.
+- `tools/` pins the canonical quality gate, coverage gate, and conformance
+  verifier.
 - `internal/authority/` contains authority-owned Go logic when materialized.
 - `internal/packaging/` contains whitebox workflow and packaging contracts.
 - `repo-bindings.json` binds the canonical repo-surface adoption (home pin,
