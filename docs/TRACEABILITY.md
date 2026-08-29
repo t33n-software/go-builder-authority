@@ -100,3 +100,25 @@ builder artifact or evidence registries
 any change to the builder authority, evidence, policy, or consumer contracts
 any change to the GBA-2 builder artifact delivery branch
 ```
+
+## GBA-8: Reference the canonical gate chain through the tool pin
+
+Status: in implementation.
+
+GBA-8 establishes:
+
+```text
+the canonical quality-gate invocation through the pinned tooling module
+the schema-owned default ticket-family scope
+the removal of repository-local gate-chain copies
+the fail-closed contract proof that no local gate-chain directory remains
+```
+
+GBA-8 does not establish:
+
+```text
+an approved Go builder image
+builder artifact or evidence registries
+any change to the builder authority, evidence, policy, or consumer contracts
+any change to the GBA-2 builder artifact delivery branch
+```

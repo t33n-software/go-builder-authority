@@ -9,7 +9,6 @@ boundaries.
   workflows/                source-quality and future builder delivery workflows
 builder/
   go/                       Go builder definition and controlled input manifests
-cmd/                        repository-local verification tools
 docs/
   architecture/             authority and lifecycle decisions
   conventions/              Go builder source and hosting-platform rule-set
@@ -21,6 +20,7 @@ internal/
   authority/                authority-owned Go domain and application logic
   packaging/                whitebox workflow and packaging contracts
 policy/                     versioned policy references without credentials
+tools/                      pinned canonical quality and governance tooling
 ```
 
 The following boundaries remain external to this repository:

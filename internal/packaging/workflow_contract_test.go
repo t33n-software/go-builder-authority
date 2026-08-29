@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"os"
 	"path/filepath"
+	"slices"
 	"strings"
 	"testing"
 )
@@ -166,17 +167,50 @@ func TestModuleIdentityAndQualityContract(t *testing.T) {
 	}
 
 	quality := readRepositoryFile(t, "git-governance.quality.json")
-	for _, required := range []string{
-		`"schemaVersion": 4`,
-		`"language": "go"`,
-		`"version": "1.26.6"`,
-		`"extends": []`,
-		"go-builder-authority-source-quality",
-		"./cmd/build",
-	} {
-		if !strings.Contains(quality, required) {
-			t.Fatalf("git-governance.quality.json does not contain %q", required)
-		}
+	var qualityConfig struct {
+		SchemaVersion int `json:"schemaVersion"`
+		Toolchain     struct {
+			Language string `json:"language"`
+			Version  string `json:"version"`
+		} `json:"toolchain"`
+		Extends  []string        `json:"extends"`
+		Defaults json.RawMessage `json:"defaults"`
+		Gates    []struct {
+			Name    string   `json:"name"`
+			Command string   `json:"command"`
+			Args    []string `json:"args"`
+		} `json:"gates"`
+		Project json.RawMessage `json:"project"`
+	}
+	if err := json.Unmarshal([]byte(quality), &qualityConfig); err != nil {
+		t.Fatalf("git-governance.quality.json is not valid JSON: %v", err)
+	}
+	if qualityConfig.SchemaVersion != 4 {
+		t.Fatalf("git-governance.quality.json carries schemaVersion %d, want 4", qualityConfig.SchemaVersion)
+	}
+	if qualityConfig.Toolchain.Language != "go" || qualityConfig.Toolchain.Version != "1.26.6" {
+		t.Fatalf("git-governance.quality.json carries toolchain %#v, want go 1.26.6", qualityConfig.Toolchain)
+	}
+	if qualityConfig.Extends == nil || len(qualityConfig.Extends) != 0 {
+		t.Fatalf("git-governance.quality.json carries extends %#v, want an explicit empty list", qualityConfig.Extends)
+	}
+	if len(qualityConfig.Defaults) != 0 {
+		t.Fatalf("git-governance.quality.json must rely on the schema-owned defaults, got %s", qualityConfig.Defaults)
+	}
+	if len(qualityConfig.Project) != 0 {
+		t.Fatalf("git-governance.quality.json must not declare repository-local gate-chain binaries, got %s", qualityConfig.Project)
+	}
+	if len(qualityConfig.Gates) != 1 {
+		t.Fatalf("git-governance.quality.json carries %d gates, want the canonical gate chain", len(qualityConfig.Gates))
+	}
+	gate := qualityConfig.Gates[0]
+	if gate.Name != "go-builder-authority-source-quality" ||
+		gate.Command != "go" ||
+		!slices.Equal(gate.Args, []string{"tool", "-modfile", "tools/go.mod", "quality-gate"}) {
+		t.Fatalf("the quality gate does not invoke the canonical gate chain through the tooling module pin: %#v", gate)
+	}
+	if _, err := os.Stat(repositoryPath("cmd")); !os.IsNotExist(err) {
+		t.Fatalf("the repository must not retain a repo-local gate-chain directory: %v", err)
 	}
 
 	lefthook := readRepositoryFile(t, "lefthook.yml")
@@ -226,8 +260,10 @@ func TestGoToolchainAndBuildToolingContract(t *testing.T) {
 	}
 
 	traceability := readRepositoryFile(t, filepath.Join("docs", "TRACEABILITY.md"))
-	if !strings.Contains(traceability, "GBA-4") {
-		t.Fatal("TRACEABILITY.md does not contain GBA-4")
+	for _, ticket := range []string{"GBA-4", "GBA-8"} {
+		if !strings.Contains(traceability, ticket) {
+			t.Fatalf("TRACEABILITY.md does not contain %s", ticket)
+		}
 	}
 }
 
