@@ -122,3 +122,34 @@ builder artifact or evidence registries
 any change to the builder authority, evidence, policy, or consumer contracts
 any change to the GBA-2 builder artifact delivery branch
 ```
+
+## GBA-9: Onboard the license-hub render-and-verify lane
+
+Status: in implementation.
+
+GBA-9 establishes:
+
+```text
+the tenant values license.values.json and the digest-pinned lock
+  license.lock.json (template license-hub/templates/custom/norepublish/
+  NoRepublish-1.0.0.hbs, version 1.0.0)
+the rendered LICENSE and LICENSES/LicenseRef-go-builder-authority-
+  NoRepublish-1.0.txt instance proven byte-identical against the
+  canonical render
+the binding manifest flip licenseHub: true
+the coupled tooling-module pins for the catalog-admitted license CLI,
+  the license-content-proof verifier, and the go-quality-authority
+  catalog stand
+the three callers byte-identical to the reissued canonical pin and the
+  conformance lane re-bound to it, activating the merge-blocking license
+  content proof inside the canonical conformance check
+```
+
+GBA-9 does not establish:
+
+```text
+an approved Go builder image
+builder artifact or evidence registries
+any change to the builder authority, evidence, policy, or consumer contracts
+any change to the GBA-2 builder artifact delivery branch
+```
